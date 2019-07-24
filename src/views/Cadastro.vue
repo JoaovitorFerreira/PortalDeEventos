@@ -10,17 +10,18 @@
 </template>
 
 <script>
-
-
+    import firebase from 'firebase'
     export default {
-        name: "Cadastro",
+        name: "cadastro",
         data(){
-            return {}
+            return {
+                email: '',
+                password: ''
+            };
         },
         methods: {
             cadastro: function () {
-                firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-                    function(user){
+                firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user) =>{
                         this.$router.replace('home')
                     },
                     function (err) {

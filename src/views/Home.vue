@@ -10,15 +10,15 @@
 
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-
+import firebase from 'firebase'
 export default {
   name: 'home',
   components: {
     HelloWorld
   },
   methods:{
-    logout: function () {
-      firebase.auth().signOut().then(() =>{
+    logout() {
+      firebase.auth().signOut().then((user) =>{
         this.$router.replace('login')
       });
     }
