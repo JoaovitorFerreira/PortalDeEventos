@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">Login</router-link>
+
     </div>
     <router-view/>
   </div>
@@ -28,4 +29,8 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+</style>
+
+<style lang="css">
+  @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 </style>
