@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Cadastro from "./views/Cadastro"
-import About from './views/About'
+import Profile from './views/Profile'
 import firebase from "firebase";
 
 Vue.use(Router)
@@ -26,8 +26,8 @@ const router = new Router({
     },
 
     {
-      path: '/about',
-      name: 'About',
+      path: '/profile',
+      name: 'Profile',
     },
 
     {
