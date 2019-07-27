@@ -22,7 +22,7 @@
         methods: {
             cadastro: function () {
                 firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user) =>{
-                        this.$router.replace('home')
+                        this.$router.replace('login')
                     },
                     function (err) {
                         alert('Espere! ' + err.message)

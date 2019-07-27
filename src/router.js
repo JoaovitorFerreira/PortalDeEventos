@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Cadastro from "./views/Cadastro"
 import Profile from './views/Profile'
+import Navbar from './components/Navbar'
 import firebase from "firebase";
 
 Vue.use(Router)
@@ -28,6 +29,9 @@ const router = new Router({
     {
       path: '/profile',
       name: 'Profile',
+      meta: {
+        requiresAuth: true
+      }
     },
 
     {

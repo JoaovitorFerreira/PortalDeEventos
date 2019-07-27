@@ -1,11 +1,7 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/profile">Profile</router-link> |
-      <router-link to="/login">Login</router-link>
+<div id="app">
+    <Navbar />
     </div>
-    <router-view/>
-  </div>
 </template>
 
 <style>
@@ -29,7 +25,15 @@
   color: #42b983;
 }
 </style>
-
+<script>
+    import Navbar from "./components/Navbar";
+    export default {
+        name: 'app',
+        components: {
+            Navbar,
+        }
+    };
+</script>
 <style lang="css">
   @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 </style>

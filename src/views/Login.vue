@@ -25,6 +25,7 @@
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user)=>{
                         alert(`Você logou como ${this.email}`);
                         this.$router.replace('home')
+                        location.reload();
                     },
                     (err) => {
                         alert('Opa! '+err.message)
