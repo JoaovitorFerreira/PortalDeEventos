@@ -4,7 +4,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Cadastro from "./views/Cadastro"
 import Profile from './views/Profile'
-import Navbar from './components/Navbar'
+import GerenciadordeEventos from './views/GerenciadordeEventos'
 import firebase from "firebase";
 
 Vue.use(Router)
@@ -25,10 +25,19 @@ const router = new Router({
       name: 'Cadastro',
       component: Cadastro
     },
+    {
+      path: '/GerenciadordeEventos',
+      name: 'GerenciadordeEventos',
+      component: GerenciadordeEventos,
+      meta: {
+        requiresAuth: true
+      }
+    },
 
     {
       path: '/profile',
       name: 'Profile',
+      component: Profile,
       meta: {
         requiresAuth: true
       }
