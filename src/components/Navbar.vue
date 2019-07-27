@@ -2,7 +2,6 @@
     <div id="Navbar">
         <div id="nav">
             <ul>
-                <li v-if="!usuarioEstaLogado"><router-link  to="/login">Login</router-link></li>
                 <li v-if="usuarioEstaLogado"><span>{{usuarioLogado}}</span></li>
                 <li v-if="usuarioEstaLogado"><router-link to="/profile">Profile</router-link></li>
                 <li v-if="usuarioEstaLogado"><router-link to="/home">Home</router-link></li>
@@ -35,7 +34,7 @@
         methods:{
             logout: function () {
                 firebase.auth().signOut().then(() =>{
-                    this.$router.push('/login')
+                    this.$router.replace('/login')
                     location.reload();
                 });
 

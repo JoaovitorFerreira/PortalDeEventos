@@ -22,6 +22,7 @@
                 user.delete().then((user) =>{
                     alert(`A conta de ${userEmail} foi excluída!`);
                     this.$router.replace('login')
+                    location.reload();
                 }).catch(function(error) {
 
                 });
