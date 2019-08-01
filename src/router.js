@@ -4,7 +4,10 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Cadastro from "./views/Cadastro"
 import Profile from './views/Profile'
-import GerenciadordeEventos from './views/GerenciadordeEventos'
+import listaEventos from '@/components/listaEventos'
+import editarEvento from '@/components/editarEvento'
+import novoEvento from '@/components/novoEvento'
+import verEvento from '@/components/verEvento'
 import firebase from "firebase";
 
 Vue.use(Router)
@@ -21,14 +24,38 @@ const router = new Router({
     },
 
     {
-      path: '/Cadastro',
+      path: '/cadastro',
       name: 'Cadastro',
       component: Cadastro
     },
     {
-      path: '/GerenciadordeEventos',
-      name: 'GerenciadordeEventos',
-      component: GerenciadordeEventos,
+      path: '/listaEventos',
+      name: 'listaEventos',
+      component: listaEventos,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/editarEvento/:id_evento',
+      name: 'editarEvento',
+      component: editarEvento,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/verEvento/:id_evento',
+      name: 'verEvento',
+      component: verEvento,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/new',
+      name: 'novoEvento',
+      component: novoEvento,
       meta: {
         requiresAuth: true
       }

@@ -1,5 +1,5 @@
 <template>
-    <div class = "login">
+    <div class = "login" blue>
         <h3> Login</h3>
         <input type="text" v-model="email" placeholder="email"><br>
         <input type="password" v-model="password" placeholder="senha"><br>

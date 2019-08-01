@@ -1,16 +1,16 @@
 <template>
-    <div id="Navbar">
-        <div id="nav">
-            <ul>
-                <li v-if="usuarioEstaLogado"><span>{{usuarioLogado}}</span></li>
-                <li v-if="usuarioEstaLogado"><router-link to="/profile">Profile</router-link></li>
-                <li v-if="usuarioEstaLogado"><router-link to="/home">Home</router-link></li>
-                <li v-if="usuarioEstaLogado"><router-link to="/GerenciadordeEventos">Gerenciador de Eventos</router-link></li>
-                <li v-if="usuarioEstaLogado"><button v-on:click="logout">Logout</button></li>
-            </ul>
-        </div>
-        <router-view/>
+    <nav>  
+        <div class="nav-wrap blue">
+            <div class="container">
+                <p v-if="usuarioEstaLogado"><span>{{usuarioLogado}}</span></p>                
+                <p v-if="usuarioEstaLogado"><router-link to="/profile">Profile</router-link></p>
+                <p v-if="usuarioEstaLogado"><router-link to="/home">Home</router-link></p>
+                <p v-if="usuarioEstaLogado"><router-link to="/listaEventos">Gerenciador de Eventos</router-link></p>
+                <p v-if="usuarioEstaLogado"><button v-on:click="logout">Logout</button></p>
     </div>
+        </div>
+    </nav>    
+   
 </template>
 
 <script>
