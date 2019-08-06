@@ -1,11 +1,14 @@
 <template>
-    <div class = "login" blue>
-        <h3> Login</h3>
-        <input type="text" v-model="email" placeholder="email"><br>
-        <input type="password" v-model="password" placeholder="senha"><br>
-        <button @click="login" >Login</button>
-        <p>sem conta? não se preocupe, clique no link abaixo e se una a nossa rede!</p>
-        <router-link to="/Cadastro">Cadastre aqui!</router-link>
+    <div class = "login container center-align">
+        <h3>Login</h3>
+        <input type="text" v-model="email" placeholder="Email" class="validate"><br>
+        <input type="password" v-model="password" placeholder="Senha" class="validate"><br><br>
+        <button class="btn waves-effect waves-light blue" @click="login" >Login
+            <i class="material-icons right">send</i>
+        </button>
+        <p>Sem conta? Não se preocupe, clique no link abaixo e una-se a nossa rede!</p>
+        <router-link to="/Cadastro" class="btn waves-effect waves-light green">Cadastre aqui!     
+         <i class="material-icons right">edit</i></router-link>
     </div>
 
 </template>

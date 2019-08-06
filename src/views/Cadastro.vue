@@ -1,11 +1,12 @@
 <template>
-    <div class = "cadastro">
-        <h3> Cadastro</h3>
+    <div class = "cadastro container center-align">
+        <h3>Cadastro</h3>
         <p>Complete aqui o seu cadastro!</p>
-        <input type="text" v-model="email" placeholder="Email"><br>
-        <input type="password" v-model="password" placeholder="Senha"><br>
-        <button @click="cadastro" >Cadastre-se</button><br>
-        <span>ou volte para a tela de <router-link to="/login">login</router-link></span>
+        <input type="text" v-model="email" placeholder="Email" class="validate"><br>
+        <input type="password" v-model="password" placeholder="Senha" class="validate"><br><br>
+        <button  class="btn waves-effect waves-light blue" @click="cadastro">Cadastre-se
+           <i class="material-icons right">send</i> </button><br><br>
+      <router-link class = "btn waves-effect waves-light red" to="/login">Voltar</router-link>
     </div>
 </template>
 
