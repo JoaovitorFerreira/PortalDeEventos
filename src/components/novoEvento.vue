@@ -27,11 +27,20 @@
                 <label>Tipo do Evento:</label>
                 </div>    
             </div>
+            <div class="row">
+                <div class="input-field col s12">
+                <input type="url" v-model="form" required>
+                <label>Link formulário inscrição:</label>
+                </div>    
+            </div>
              <router-link to="/" class="btn grey">Cancel</router-link>
+            <a class= "btn btn-info" role="button" href = https://docs.google.com/forms/d/14H645C0kXDhAG0-EsxdhwM2yRGCine2gKjmNOyJLQAk/copy>Link para formulário base</a>
             <button type="submit" class="btn">Submit</button>           
             </form>
+            
         </div>
     </div>
+    
 </template>
 
 <script>
@@ -43,7 +52,8 @@ export default{
             id_evento: null,
             nome:null,
             local:null,
-            tipo:null
+            tipo:null,
+            form: null
         }
     },
     methods: {
@@ -52,7 +62,8 @@ export default{
                 id_evento: this.id_evento,
                 nome: this.nome,
                 local: this.local,
-                tipo: this.tipo
+                tipo: this.tipo,
+                form: this.form
             })
             .then(docRef=> {
                 this.$router.push('/listaEventos')

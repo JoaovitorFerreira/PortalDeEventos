@@ -23,6 +23,11 @@
                 <input type="text" v-model="tipo" required>
                 </div>    
             </div>
+            <div class="row">
+                <div class="input-field col s12">
+                <input type="url" v-model="form" required>
+                </div>    
+            </div>
              <router-link to="../listaEventos" class="btn grey">Cancel</router-link>
             <button type="submit" class="btn">Submit</button>           
             </form>
@@ -39,7 +44,8 @@
             id_evento: null,
             nome:null,
             local:null,
-            tipo:null
+            tipo:null,
+            form:null
         }
     },
     beforeRouteEnter(to, from, next){
@@ -50,7 +56,7 @@
                     vm.nome = doc.data().nome
                     vm.local = doc.data().local
                     vm.tipo = doc.data().tipo
-
+                    vm.form = doc.data().form
                 })
             })
         })
@@ -66,6 +72,7 @@
                 this.nome = doc.data().nome
                 this.local = doc.data().local
                 this.tipo = doc.data().tipo
+                this.form = doc.data().form
             })
             })
         },
@@ -76,7 +83,8 @@
                    id_evento: this.id_evento,
                    nome: this.nome,
                    local: this.local,
-                   tipo: this.tipo
+                   tipo: this.tipo,
+                   form: this.form
                })
                .then(
                    () =>

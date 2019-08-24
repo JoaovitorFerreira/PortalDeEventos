@@ -48,8 +48,8 @@ export default{
                         'id_evento':doc.data().id_evento,
                         'nome':doc.data().nome,
                         'local':doc.data().local,
-                        'tipo':doc.data().tipo
-
+                        'tipo':doc.data().tipo,
+                        'form': doc.data().form
                     }
                     this.eventos.push(data)
                 })

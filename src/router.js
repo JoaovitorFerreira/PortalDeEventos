@@ -8,6 +8,7 @@ import listaEventos from '@/components/listaEventos'
 import editarEvento from '@/components/editarEvento'
 import novoEvento from '@/components/novoEvento'
 import verEvento from '@/components/verEvento'
+import listaDeMusicas from '@/components/listaDeMusicas'
 import firebase from "firebase";
 
 Vue.use(Router)
@@ -32,6 +33,14 @@ const router = new Router({
       path: '/listaEventos',
       name: 'listaEventos',
       component: listaEventos,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/listaDeMusicas/:id_evento',
+      name: 'listaDeMusicas',
+      component: listaDeMusicas,
       meta: {
         requiresAuth: true
       }
@@ -72,11 +81,11 @@ const router = new Router({
 
     {
       path: '*',
-      redirect:'/login'
+      redirect: '/login'
     },
 
     {
-      path:'/',
+      path: '/',
       redirect: '/login'
 
     },
@@ -85,15 +94,16 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
-    }
+    },
 
+    
   ]
 });
 
-router.beforeEach((to, from, next) =>{
+router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  if(requiresAuth && !currentUser) next('login');
+  if (requiresAuth && !currentUser) next('login');
   else if (!requiresAuth && currentUser) next('home');
   else next();
 });
