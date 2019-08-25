@@ -34,7 +34,7 @@
                 </div>    
             </div>
              <router-link to="/" class="btn grey">Cancel</router-link>
-            <a class= "btn btn-info" role="button" href = https://docs.google.com/forms/d/14H645C0kXDhAG0-EsxdhwM2yRGCine2gKjmNOyJLQAk/copy>Link para formulário base</a>
+            <a class= "btn btn-info" role="button" href = https://docs.google.com/forms/d/14H645C0kXDhAG0-EsxdhwM2yRGCine2gKjmNOyJLQAk/copy target="_blank">Link para formulário base</a>
             <button type="submit" class="btn">Submit</button>           
             </form>
             
