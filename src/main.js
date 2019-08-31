@@ -22,7 +22,7 @@ firebase.auth().onAuthStateChanged(()=>{
 });
 
 Vue.filter('formatDate', function (value) {
-  if(!value)return''
-  return moment(value.toString().format('MM/DD/YYYY hh:mm')
+  if (!value) return ''
+  return moment(value.toString()).format('MM/DD/YYYY hh:mm')
 })
 

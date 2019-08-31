@@ -1,35 +1,36 @@
 
 <template>
   <div id="listaDeMusicas">
-
-    <form class="mb-5">
-      <div class="input-group">
-        <input
-                v-model="searchString"
-                @keydown.13.prevent="parseSearchString"
-                type="text"
-                class="form-control"
-                placeholder="Search ..."
-        >
-        <div class="input-group-append">
-          <button @click="parseSearchString" class="btn btn-outline-secondary" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
-
-
-
+    <SearchForm v-on:search="search"/>
+    <SearchResults
+      v-if="videos.length > 0"
+      v-bind:videos="videos"
+      v-bind:reformattedSearchString="reformattedSearchString"
+    />
+    <Pagination
+      v-if="videos.length > 0"
+      v-bind:prevPageToken="api.prevPageToken"
+      v-bind:nextPageToken="api.nextPageToken"
+      v-on:prev-page="prevPage"
+      v-on:next-page="nextPage"
+    />
   </div>
 </template>
 <script>
 import db from "./firebaseInit.js";
+import SearchForm from './SearchForm';
+import SearchResults from './SearchResults';
+import Pagination from './Pagination';
+import axios from 'axios';
 export default {
   name: "listaDeMusicas",
+  components: {
+    SearchForm,
+    SearchResults,
+    Pagination
+  },
   data() {
-    var YOUR_API_KEY = AIzaSyCB467L1bXQLzKGddy9ReRSmhXsyZ9k5is;
+    var YOUR_API_KEY = 'AIzaSyCB467L1bXQLzKGddy9ReRSmhXsyZ9k5is';
     return {
       videos:[],
       reformattedSearchString:'',
