@@ -17,7 +17,6 @@
   </div>
 </template>
 <script>
-var urlVideo
 import db from "./firebaseInit.js";
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
@@ -50,8 +49,7 @@ export default {
       nome: null,
       local: null,
       tipo: null,
-      form: null,
-      apiUrl:urlVideo
+      form: null
     };
 
   },

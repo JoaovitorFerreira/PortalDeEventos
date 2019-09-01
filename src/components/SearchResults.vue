@@ -26,8 +26,7 @@
 
     <div class="card-columns" v-if="displayMode === 'grid'">
       <div class="card" v-bind:key="video.id.videoId" v-for="video in videos">
-        <VideoGridItem v-bind:video="video"/> 
-        <button @click="adicionarPlaylist" class="btn green">Adicionar À Playlist</button>
+        <VideoGridItem v-bind:video="video"/>
       </div>
     </div>
     <div v-else>
@@ -41,9 +40,6 @@
 <script>
 import VideoListItem from './VideoListItem';
 import VideoGridItem from './VideoGridItem';
-import listaDeMusicas from './listaDeMusicas'
-import firebase from 'firebase'
-import axios from 'axios'
 
 export default {
   name: 'SearchResults',
@@ -62,18 +58,6 @@ export default {
       this.displayMode = displayMode;
     }
   },
-    adicionarPlaylist(){
-            db.collection('linkvideos').add({
-              link:this.urlVideo
-            })
-            .then(docRef=> {
-                this.$router.push('/listaEventos')
-            })
-            .catch(error => {
-                console.log(err)
-            })
-    },
-
   props: ['videos', 'reformattedSearchString']
 };
 </script>

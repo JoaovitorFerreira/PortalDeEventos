@@ -1,12 +1,12 @@
 <template>
   <div class="container blue">
     <nav class="blue">
-      <ul class>
-        <li class="left" v-bind:class="{ disabled: prevPageToken === undefined }">
-          <a @click="prevPage" class="page-link" href="#">Anterior</a>
+      <ul class="blue">
+        <li v-bind:class="{ disabled: prevPageToken === undefined }">
+          <a @click="prevPage" class="page-link" href="#">Previous</a>
         </li>
-        <li class="right" v-bind:class="{ disabled: nextPageToken === undefined }">
-          <a @click="nextPage" class="page-link" href="#">Próximo</a>
+        <li v-bind:class="{ disabled: nextPageToken === undefined }">
+          <a @click="nextPage" class="page-link" href="#">Next</a>
         </li>
       </ul>
     </nav>

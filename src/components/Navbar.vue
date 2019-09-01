@@ -4,7 +4,7 @@
               <div class="container">
               <span v-if="usuarioEstaLogado"><router-link to="/profile">{{usuarioLogado}}</router-link></span>
               <span class="brand-logo" v-else>Portal de Festas Unirio</span>    
-              <ul id="nav-mobile" class="right hide-on-med-and-down">          
+              <ul id="nav-movbile" class="right hide-on-med-and-down">          
               <li v-if="usuarioEstaLogado"><router-link to="/profile">Profile</router-link></li>
               <li v-if="usuarioEstaLogado"><router-link to="/home">Home</router-link></li>
               <li v-if="usuarioEstaLogado"><router-link to="/listaEventos">Gerenciador de Eventos</router-link></li>
