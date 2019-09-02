@@ -27,6 +27,7 @@
     <div class="card-columns" v-if="displayMode === 'grid'">
       <div class="card" v-bind:key="video.id.videoId" v-for="video in videos">
         <VideoGridItem v-bind:video="video"/>
+        <button @click="addPlaylist" class = btn green>Adicionar</button>
       </div>
     </div>
     <div v-else>
@@ -40,6 +41,8 @@
 <script>
 import VideoListItem from './VideoListItem';
 import VideoGridItem from './VideoGridItem';
+import firebase from 'firebase';
+import db from './firebaseInit';
 
 export default {
   name: 'SearchResults',
@@ -56,6 +59,11 @@ export default {
   methods: {
     changeDisplayMode(displayMode) {
       this.displayMode = displayMode;
+    },
+    addPlaylist(){
+      db.collection('linkvideos').add({
+                link:'https://www.youtube.com/watch?v='
+            })
     }
   },
   props: ['videos', 'reformattedSearchString']
