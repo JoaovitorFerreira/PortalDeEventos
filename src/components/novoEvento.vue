@@ -45,6 +45,8 @@
 
 <script>
     import db from './firebaseInit'
+    import firebase from 'firebase'
+
 export default{
     name: 'novoEvento',
     data(){
@@ -53,7 +55,8 @@ export default{
             nome:null,
             local:null,
             tipo:null,
-            form: null
+            form: null,
+            id_criador: null
         }
     },
     methods: {
@@ -63,7 +66,8 @@ export default{
                 nome: this.nome,
                 local: this.local,
                 tipo: this.tipo,
-                form: this.form
+                form: this.form,
+                id_criador: firebase.auth().currentUser.uid
             })
             .then(docRef=> {
                 this.$router.push('/listaEventos')

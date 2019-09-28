@@ -7,10 +7,11 @@
       <li class="collection-item">ID do Evento: {{id_evento}}</li>
       <li class="collection-item">Local do Evento: {{local}}</li>
       <li class="collection-item">Tipo do Evento: {{tipo}}</li>
-        <li class="collection-item">Link formulário inscrição: <a v-bind:href="form" target="_blank">{{form}}</a></li>
+      <li class="collection-item">Link formulário inscrição: <a v-bind:href="form" target="_blank">{{form}}</a></li>
     </ul>
-    <router-link to="../listaEventos" class="btn grey">Back</router-link>
-    <button @click="deletarEvento" class="btn red">Delete</button>
+    <router-link v-bind:to="{name: 'listaDeMusicas', params:{id_evento:id_evento}}" class="btn">Lista de Músicas</router-link><br><br>
+    <router-link to="../listaEventos" class="btn grey">Voltar</router-link>
+    <button @click="deletarEvento" class="btn red">Deletar</button>
 
     <div class="fixed-action-btn">
       <router-link
@@ -21,12 +22,14 @@
       </router-link>
     </div>
 
-    <router-link v-bind:to="{name: 'listaDeMusicas', params:{id_evento:id_evento}}" class="btn">Lista de Músicas</router-link>
+    
   </div>
 </template>
 
 <script>
-import db from "./firebaseInit";
+import db from './firebaseInit';
+import firebase from 'firebase';
+
 export default {
   name: "verEvento",
   data() {
@@ -35,7 +38,8 @@ export default {
       nome: null,
       local: null,
       tipo: null,
-      form: null
+      form: null,
+      id_criador: null
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -50,6 +54,7 @@ export default {
             vm.local = doc.data().local;
             vm.tipo = doc.data().tipo;
             vm.form = doc.data().form;
+            vm.id_criador = doc.data().id_criador;
           });
         });
       });
@@ -58,6 +63,14 @@ export default {
     $route: "fetchData"
   },
   methods: {
+                    // colocar um v-if="usuarioDono" no botão de editar
+/* usuarioDono(){  // (\/ não estou conseguindo referenciar o evento de maneira correta)
+      if( this.eventos.id_criador == firebase.auth().currentUser.uid) 
+        return true;
+      else
+        return false;
+    }, */
+
     fetchData() {
       db.collection("eventos")
         .where("id_evento", "==", this.$route.params.id_evento)
@@ -69,6 +82,7 @@ export default {
             this.local = doc.data().local;
             this.tipo = doc.data().tipo;
             this.form = doc.data().form;
+
           });
         });
     },
