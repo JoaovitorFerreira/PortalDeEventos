@@ -11,10 +11,10 @@
     </ul>
     <router-link v-bind:to="{name: 'listaDeMusicas', params:{id_evento:id_evento}}" class="btn">Lista de Músicas</router-link><br><br>
     <router-link to="../listaEventos" class="btn grey">Voltar</router-link>
-    <button @click="deletarEvento" class="btn red">Deletar</button>
+    <button v-if="usuarioDono" @click="deletarEvento" class="btn red">Deletar</button>
 
-    <div class="fixed-action-btn">
-      <router-link
+    <div v-if="usuarioDono" class="fixed-action-btn">
+      <router-link        
         v-bind:to="{name: 'editarEvento', params:{id_evento:id_evento}}"
         class="btn-floating btn-large blue"
       >
@@ -29,7 +29,7 @@
 <script>
 import db from './firebaseInit';
 import firebase from 'firebase';
-
+var user;
 export default {
   name: "verEvento",
   data() {
@@ -39,10 +39,12 @@ export default {
       local: null,
       tipo: null,
       form: null,
-      id_criador: null
+      id_criador: null,
+      usuarioDono:false
     };
   },
   beforeRouteEnter(to, from, next) {
+    user = firebase.auth().currentUser
     db.collection("eventos")
       .where("id_evento", "==", to.params.id_evento)
       .get()
@@ -55,9 +57,13 @@ export default {
             vm.tipo = doc.data().tipo;
             vm.form = doc.data().form;
             vm.id_criador = doc.data().id_criador;
+              if(vm.id_criador == user.uid){
+              vm.usuarioDono = true;
+              }
           });
         });
-      });
+      }
+      )
   },
   watch: {
     $route: "fetchData"
@@ -82,9 +88,12 @@ export default {
             this.local = doc.data().local;
             this.tipo = doc.data().tipo;
             this.form = doc.data().form;
-
+            this.id_criador = doc.data().id_criador;           
+        
           });
-        });
+        }
+        )
+        
     },
     deletarEvento() {
       if (confirm("Tem certeza?")) {
