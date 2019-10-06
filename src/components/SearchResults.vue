@@ -27,7 +27,8 @@
     <div class="card-columns" v-if="displayMode === 'grid'">
       <div class="card" v-bind:key="video.id.videoId" v-for="video in videos">
         <VideoGridItem v-bind:video="video"/>
-        <button @click="addPlaylist" class = btn green>Adicionar</button>
+        <button @click="addToPlaylist(video.id.videoId)" class = btn green>Adicionar</button>
+        <h5>{{video.id.videoId}}</h5>
       </div>
     </div>
     <div v-else>
@@ -51,20 +52,74 @@ export default {
     VideoGridItem
   },
   data() {
+    var YOUR_API_KEY = 'AIzaSyCB467L1bXQLzKGddy9ReRSmhXsyZ9k5is';
     return {
+      videos:[],
+      reformattedSearchString:'',
+      api:{
+        baseUrl: 'https://www.googleapis.com/youtube/v3/search?',
+        part: 'snippet',
+        type: 'video',
+        order: 'viewCount',
+        maxResults: 12,
+        q: '',
+        key: YOUR_API_KEY,
+        prevPageToken: '',
+        nextPageToken: ''
+      },
+
       title: 'Search Results',
-      displayMode: 'grid'
-    };
+      displayMode: 'grid',
+      video: video,
+      id_evento: null,
+  };
+
   },
+  beforeRouteEnter(to, from, next) {
+    db.collection("eventos")
+            .where("id_evento", "==", to.params.id_evento)
+            .get()
+            .then(querySnapshot => {
+              querySnapshot.forEach(doc => {
+                next(vm => {
+                  vm.id_evento = doc.data().id_evento;
+                });
+              });
+            });
+  },
+  watch: {
+    $route: "fetchData"
+  },
+
   methods: {
     changeDisplayMode(displayMode) {
       this.displayMode = displayMode;
     },
-    addPlaylist(){
-      db.collection('linkvideos').add({
-                link:'https://www.youtube.com/watch?v='
-            })
-    }
+    fetchData() {
+      db.collection("eventos")
+              .where("id_evento", "==", this.$route.params.id_evento)
+              .get()
+              .then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                  this.id_evento = doc.data().id_evento;
+                });
+              });
+    },
+
+    addToPlaylist(key){
+      console.log(id_evento)
+      console.log("Atualizado com sucesso")
+      console.log(key)
+
+      db.collection("eventos").doc().collection("playlist").add({
+                link: 'https://www.youtube.com/watch?v='+key,
+            }).then(function(){
+              console.log("Atualizado com sucesso")
+              console.log(this.id_evento)
+              console.log(key)
+
+      })
+    },
   },
   props: ['videos', 'reformattedSearchString']
 };
