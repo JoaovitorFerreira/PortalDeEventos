@@ -13,6 +13,14 @@
     <router-link to="../listaEventos" class="btn grey">Voltar</router-link>
     <button v-if="usuarioDono" @click="deletarEvento" class="btn red">Deletar</button>
 
+ <ul v-if="usuarioDono" class="collapsible">
+    <li >
+      <div class="collapsible-header"><i class="material-icons">account_circle</i>Vídeos Para Playlist: {{playlist.lenght}}</div>
+      <div v-for="video in playlist"
+                    v-bind:key="video.id" class="collapsible-body"><span>{{video.link}}</span></div>
+    </li>
+  </ul>
+
     <div v-if="usuarioDono" class="fixed-action-btn">
       <router-link        
         v-bind:to="{name: 'editarEvento', params:{id_evento:id_evento}}"
@@ -20,6 +28,8 @@
       >
         <i class="fa fa-pencil"></i>
       </router-link>
+ 
+
     </div>
 
     
@@ -30,6 +40,16 @@
 import db from './firebaseInit';
 import firebase from 'firebase';
 var user;
+
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+
+ document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+
 export default {
   name: "verEvento",
   data() {
@@ -40,6 +60,7 @@ export default {
       tipo: null,
       form: null,
       id_criador: null,
+      playlist: [],
       usuarioDono:false
     };
   },
@@ -68,14 +89,39 @@ export default {
   watch: {
     $route: "fetchData"
   },
+
+created(){
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+
+ document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+db.collection("eventos")
+        .where("id_evento", "==", this.$route.params.id_evento)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            db.collection("eventos").doc(doc.id).collection('playlist')
+              .get()
+              .then(querrySnapshot =>{
+                querrySnapshot.forEach(doc =>{
+                  console.log(doc.id)
+                  const data = {
+                    'link' : doc.data().link
+                  }
+                  this.playlist.push(data);
+                })
+              })
+          });
+        }
+        )
+},
+
   methods: {
-                    // colocar um v-if="usuarioDono" no botão de editar
-/* usuarioDono(){  // (\/ não estou conseguindo referenciar o evento de maneira correta)
-      if( this.eventos.id_criador == firebase.auth().currentUser.uid) 
-        return true;
-      else
-        return false;
-    }, */
+                  
 
     fetchData() {
       db.collection("eventos")
